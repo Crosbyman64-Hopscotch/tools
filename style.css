@@ -1,0 +1,15 @@
+input[type="file"]{
+    display:none;
+}
+.upload{
+    border:1px solid #333;
+    display:inline-block;
+    border-radius: 5px;
+    padding: 5px 12px;
+    cursor: pointer;
+    background: #d4d4d4;
+    color:black;
+    font-family: 'avenir-book';
+    font-size: 18px;
+    font-weight: bold;
+}
