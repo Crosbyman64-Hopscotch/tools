@@ -1,8 +1,9 @@
 const fs=document.getElementById("file");
 fs.addEventListener("change",function(){
+    document.getElementById("upload-text").innerText="Loading..."
     const n=new FileReader;
     n.addEventListener("load",()=>{
-		customBlocks=[]
+        customBlocks=[]
         var data=JSON.parse(n.result);
         data.abilities.forEach((e)=>{
             if (e.hasOwnProperty("name"))customBlocks.push(e)
@@ -13,6 +14,7 @@ fs.addEventListener("change",function(){
         console.time("time to display")
         document.getElementById("script").innerText=result
         console.timeEnd("time to display")
+        document.getElementById("upload-text").innerText=`Project: ${data.uuid}`
         console.log(`# of characters: ${result.length}`)
     });
     n.readAsText(this.files[0])
@@ -69,9 +71,8 @@ function getObjectsFrom(obj,data,indent){
 function getObject(id,data,indent){
     var obj1=data.objects.find((g)=>g.objectID==id)
     objCode=`object "${convertToString(obj1.name)}" ("image"="${obj1.filename}",${((obj1.filename=="text-object.png")?(`"text"="${obj1.text}",`):"")}"x"=${obj1.xPosition},"y"=${obj1.yPosition}`
-    if(obj1.hasOwnProperty("rotation"))
-        objCode+=`,"rotation"=${obj1.rotation}`
-    objCode+=") {\n"
+		if(obj1.hasOwnProperty("rotation")objCode+=`,"rotation"=${obj1.rotation}`
+		objCode+=") {\n"
     var b=data.abilities.find((a)=>a.abilityID==obj1.abilityID)
     if(b)objCode+=getBlocks(b,data,indent)
 	objCode+=getRules(obj1,indent,data)
