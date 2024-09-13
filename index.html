@@ -1,12 +1,16 @@
 <!doctype html>
 <html>
   <head>
-    <title>Hopscotch Project to Script</title>
+    <title>Title</title>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
     <h1>Hopscotch Project to Script</h1>
-    <input type="file" id="file">
+    <label id="upload-btn" class="upload">
+      <input type="file" id="file" accept=".hopscotch">
+      <span id="upload-text">Upload Hopscotch Project</span>
+    </label>
     <br>
     <pre id="script"></pre>
     <script type="text/javascript" src="dataToScript.js"></script>
