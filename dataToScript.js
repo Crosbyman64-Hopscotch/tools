@@ -1,6 +1,7 @@
 const fs=document.getElementById("file");
 fs.addEventListener("change",function(){
     document.getElementById("upload-text").innerText="Loading..."
+	document.getElementById("script").innerText=""
     const n=new FileReader;
     n.addEventListener("load",()=>{
         customBlocks=[]
