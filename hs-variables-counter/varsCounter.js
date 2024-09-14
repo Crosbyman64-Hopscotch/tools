@@ -31,12 +31,4 @@ function countRef(n,v){
     console.log("%c variable references counted ("+(t2-t)+"ms) ","background:#102210;color:lime;font-weight:bold;");
     document.getElementById("info").innerText="This project has "+v.length+" variable"+((v.length!=1)?"s":"")+((u>0)?", "+u+" of which "+((u==1)?"is":"are")+" not being used.":".");
     document.getElementById("result").innerText=s;
-    writeToClipboard(s)
-}
-async function writeToClipboard(text){
-    try {
-        await navigator.clipboard.writeText(text)
-    } catch (error) {
-        console.error(error.message)
-    }
 }
