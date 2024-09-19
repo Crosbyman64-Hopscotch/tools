@@ -10,6 +10,22 @@ input[type="file"]{
     background: #d4d4d4;
     color:black;
     font-family: 'avenir-book';
-    font-size: 18px;
+    font-size: 18pt;
     font-weight: bold;
+    position: absolute;
+    top: 80px;
+    left: 8px;
+}
+.scriptArea{
+    display:none;
+    border-radius: 5px;
+    padding: 8px 8px;
+    position: absolute;
+    top: 125px;
+    left: 5 px;
+}
+.result{
+    font-family: 'avenir-book';
+    font-size: 14pt
+    font-weight:bold;
 }
