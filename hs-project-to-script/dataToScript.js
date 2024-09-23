@@ -17,7 +17,7 @@ fs.addEventListener("change",function(){
 		document.querySelector(".scriptArea").style.display="inline"
         console.timeEnd("time to display")
 		document.getElementById("upload-text").innerText="Upload Hopscotch Project"
-        document.getElementById("legend").innerText=`Project: ${data.uuid}`
+        document.getElementById("legend").innerText=`Project UUID: ${data.uuid}, Player: ${data.playerVersion}, Requires Advanced Mode: ${data.requires_beta_editor}`
         console.log(`# of characters: ${result.length}`)
     });
     n.readAsText(this.files[0])
