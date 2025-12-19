@@ -109,10 +109,10 @@ function getEvent(r,ruleParam,data){
                 }
                 else if(event.id!=7023&&event.id!=7024){
                     eventParams=getEventParams(ruleParam.datum,data)
-                    return event.type+`(${eventParams[0]})`
+                    return event.type+`${eventParams[0]}`
                 }
                 else {
-                    return event.type+`(${getParamType(r,ruleParam.datum.params[0],data,0)})`
+                    return event.type+`${getParamType(r,ruleParam.datum.params[0],data,0)}`
                 }
             } else
             return event.type
@@ -146,7 +146,7 @@ function getBlocks(b,data,indent){
             if(s)m+=getBlocks(s,data,indent)
             m+=indent+"}\n"
         } else if (c.block_class=="conditionalControl"){
-            m+=indent+`if (${getParameters(c,data)}) {\n`
+            m+=indent+`if ${getParameters(c,data)} {\n`
             var s=data.abilities.find((a)=>a.abilityID==c.controlScript.abilityID)
             if(s)m+=getBlocks(s,data,indent)
             m+=indent+"}"
