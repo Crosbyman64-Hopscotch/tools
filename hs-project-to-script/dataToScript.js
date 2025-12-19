@@ -319,7 +319,7 @@ function getColor(a){
     })
     return z
 }
-const getTrait=(t,e,d)=>((t>=2000&&t<=2018)?`object(${getTraitParamType(e,d)})`:((t>=2500&&t<=2507)?"user":"game"))+"."+e.datum.description.replace(/\s([A-Z])/g,(match,group1)=>`_${group2.toLowerCase()}`).replace(/asa%$/,"_%").replace(/^([A-Za-z0-9]+/g,(match,group1)=>`${group1.toLowerCase()}`)
+const getTrait=(t,e,d)=>((t>=2000&&t<=2018)?`object(${getTraitParamType(e,d)})`:((t>=2500&&t<=2507)?"user":"game"))+"."+e.datum.description.replace(/\s([A-Z])/g,(match,group1)=>`_${group1.toLowerCase()}`).replace(/asa%$/,"_%").replace(/^([A-Za-z0-9]+)/g,(match,group1)=>`${group1.toLowerCase()}`)
 const getObjectVarParamType=(e,d)=>((e.datum.type==8000)?`"${getTraitObject(e.datum.object,d)}"`:getTraitType(e.datum.type))
 const getTraitObject=(id,data)=>data.objects.find((a)=>a.objectID==id).name
 const convertToString=(str)=>str.replace(/(\\)(?!n)/g,"\\\\").replace(/\n/g,"\\n").replace(/"/g,'\\"')
