@@ -126,7 +126,7 @@ function getEventParams(r,data){
     var b=[]
     r.params.forEach((c)=>{
     var e=data.eventParameters.find((a)=>a.id==c.variable)
-    if(e.hasOwnProperty("objectID"))b.push(`object(${getTraitObject(e.objectID,data)}`)
+    if(e.hasOwnProperty("objectID"))b.push(`object(${getTraitObject(e.objectID,data)})`)
     else b.push(getTraitType(e.blockType))
     });
     return b
