@@ -74,6 +74,7 @@ function getObjectsFrom(obj,data,indent){
 }
 function getObject(id,data,indent){
     var obj1=data.objects.find((g)=>g.objectID==id)
+	console.log(obj1.type)
     objCode=`object "${convertToString(obj1.name)}"=(type:${chars.find((type)=>type.id==obj1.type).type},${((obj1.type==2000)?(`image:"${obj1.filename}",`):"")}${((obj1.type==1)?(`text:"${obj1.text}",`):"")}x:${obj1.xPosition},y:${obj1.yPosition}`
 	if(obj1.hasOwnProperty("rotation"))objCode+=`,angle:${obj1.rotation}`
 	objCode+=") {\n"
