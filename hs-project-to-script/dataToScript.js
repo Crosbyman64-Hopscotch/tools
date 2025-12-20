@@ -235,7 +235,7 @@ function getOperators(a,o,data){
 function getOPParams(a,o,data){
     a.params.forEach((e,i)=>{
         if(e.hasOwnProperty("datum")){
-        if(e.datum.hasOwnProperty("block_class"))o+=getOperators(e.datum,o,data)
+        if(e.datum.hasOwnProperty("block_class"))o=getOperators(e.datum,o,data)
         else if(e.datum.type==8009)o+=`local."${convertToString(e.datum.name)}"`
         else if(e.datum.hasOwnProperty("type")){
             var v=data.variables.find((v)=>v.objectIdString==e.datum.variable)
@@ -257,7 +257,7 @@ function getMathParams(a,o,data){
     a.params.forEach((e)=>{
 	    o+=e.key.replace("×","*").replace("÷","/").replace("data",", data ")
         if(e.hasOwnProperty("datum")){
-        if(e.datum.hasOwnProperty("block_class"))o+=getOperators(e.datum,o,data)
+        if(e.datum.hasOwnProperty("block_class"))o=getOperators(e.datum,o,data)
         else if(e.datum.type==8009)o+=`local."${convertToString(e.datum.name)}"`
         else if(e.datum.hasOwnProperty("type")){
             var v=data.variables.find((v)=>v.objectIdString==e.datum.variable)
@@ -279,7 +279,7 @@ function getConditionalParams(a,o,data){
     a.params.forEach((e)=>{
         o+=e.key.replace("=","==").replace("≠","!=").replace("matches"," matches ").replace("and"," and ").replace("or"," or ")
 		if(e.hasOwnProperty("datum")){
-        if(e.datum.hasOwnProperty("block_class"))o+=getOperators(e.datum,o,data)
+        if(e.datum.hasOwnProperty("block_class"))o=getOperators(e.datum,o,data)
         else if(e.datum.type==8009)o+=`local."${convertToString(e.datum.name)}"`
         else if(e.datum.hasOwnProperty("type")){
             var v=data.variables.find((v)=>v.objectIdString==e.datum.variable)
