@@ -109,7 +109,7 @@ function getEvent(r,ruleParam,data){
                 }
                 else if(event.id!=7023&&event.id!=7024){
                     eventParams=getEventParams(ruleParam.datum,data)
-                    return `${event.type}.${eventParams[0]}`
+                    return `${eventParams[0]}.${event.type}`
                 }
                 else {
                     return event.type+`(${getParamType(r,ruleParam.datum.params[0],data,0)})`
