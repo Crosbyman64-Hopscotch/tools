@@ -234,7 +234,21 @@ function getOperators(a,o,data){
 }
 function getOPParams(a,o,data){
     a.params.forEach((e,i)=>{
-        o+=getVarType(e,o,data)
+        if(e.hasOwnProperty("datum")){
+        if(e.datum.hasOwnProperty("block_class"))o+=getOperators(e.datum,o,data)
+        else if(e.datum.type==8009)o+=`local."${convertToString(e.datum.name)}"`
+        else if(e.datum.hasOwnProperty("type")){
+            var v=data.variables.find((v)=>v.objectIdString==e.datum.variable)
+            o+=getVar(v,e,data)
+        } else {
+            var t=e.datum.HSTraitTypeKey
+            o+=getTrait(t,e,data)
+        }
+    } else {
+        m=e.value.match(regex)
+        if(m)o+=e.value
+        else o+=`"${convertToString(e.value)}"`
+    }
         o+=(i==(a.params.length-1))?"":","
     })
     return o
@@ -242,7 +256,21 @@ function getOPParams(a,o,data){
 function getMathParams(a,o,data){
     a.params.forEach((e)=>{
 	    o+=e.key.replace("×","*").replace("÷","/").replace("data",", data ")
-        o+=getVarType(e,o,data)
+        if(e.hasOwnProperty("datum")){
+        if(e.datum.hasOwnProperty("block_class"))o+=getOperators(e.datum,o,data)
+        else if(e.datum.type==8009)o+=`local."${convertToString(e.datum.name)}"`
+        else if(e.datum.hasOwnProperty("type")){
+            var v=data.variables.find((v)=>v.objectIdString==e.datum.variable)
+            o+=getVar(v,e,data)
+        } else {
+            var t=e.datum.HSTraitTypeKey
+            o+=getTrait(t,e,data)
+        }
+    } else {
+        m=e.value.match(regex)
+        if(m)o+=e.value
+        else o+=`"${convertToString(e.value)}"`
+    }
     });
     return o
 }
@@ -250,7 +278,21 @@ function getConditionalParams(a,o,data){
     if(a.description=="flipped") return o+"flipped"
     a.params.forEach((e)=>{
         o+=e.key.replace("=","==").replace("≠","!=").replace("matches"," matches ").replace("and"," and ").replace("or"," or ")
-		o+=getVarType(e,o,data)
+		if(e.hasOwnProperty("datum")){
+        if(e.datum.hasOwnProperty("block_class"))o+=getOperators(e.datum,o,data)
+        else if(e.datum.type==8009)o+=`local."${convertToString(e.datum.name)}"`
+        else if(e.datum.hasOwnProperty("type")){
+            var v=data.variables.find((v)=>v.objectIdString==e.datum.variable)
+            o+=getVar(v,e,data)
+        } else {
+            var t=e.datum.HSTraitTypeKey
+            o+=getTrait(t,e,data)
+        }
+    } else {
+        m=e.value.match(regex)
+        if(m)o+=e.value
+        else o+=`"${convertToString(e.value)}"`
+    }
     });
     return o
 }
@@ -278,24 +320,6 @@ function getColor(a){
     return z
 }
 
-function getVarType(e,o,data){
-	if(e.hasOwnProperty("datum")){
-        if(e.datum.hasOwnProperty("block_class"))o=getOperators(e.datum,o,data)
-        else if(e.datum.type==8009)o=`local."${convertToString(e.datum.name)}"`
-        else if(e.datum.hasOwnProperty("type")){
-            var v=data.variables.find((v)=>v.objectIdString==e.datum.variable)
-            o=getVar(v,e,data)
-        } else {
-            var t=e.datum.HSTraitTypeKey
-            o=getTrait(t,e,data)
-        }
-    } else {
-        m=e.value.match(regex)
-        if(m)o=e.value
-        else o=`"${convertToString(e.value)}"`
-    }
-	return o
-}
 const getTrait=(t,e,d)=>((t>=2000&&t<=2018)?`object(${getTraitParamType(e,d)})`:((t>=2500&&t<=2507)?"user":"game"))+"."+e.datum.description.replace(/([A-Za-z]+)\s([A-Z])/g,(match,group1,group2)=>`${group1.toLowerCase()}_${group2.toLowerCase()}`).replace(/asa%$/,"_%")
 const getObjectVarParamType=(e,d)=>((e.datum.type==8000)?`"${getTraitObject(e.datum.object,d)}"`:getTraitType(e.datum.type))
 const getTraitObject=(id,data)=>data.objects.find((a)=>a.objectID==id).name
