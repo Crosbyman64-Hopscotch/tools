@@ -299,7 +299,7 @@ function getConditionalParams(a,o,data){
 function getVar(v,e,d){
     if(v.type==8000||v.type==8004||v.type==8005){
 		var obj_type=getObjectVarParamType(e,d)
-        return `${(obj_type=="self"||obj_type=="original_object")?(obj_type):(`object(${obj_type})`}.var."${convertToString(v.name)}"`
+        return `${(obj_type=="self"||obj_type=="original_object")?(obj_type):(`object(${obj_type})`)}.var."${convertToString(v.name)}"`
         }
     else if(v.type==8003)return `game.var."${convertToString(v.name)}"`
     else if(v.type==8007)return `user.var."${convertToString(v.name)}"`
