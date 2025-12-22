@@ -1,25 +1,3 @@
-async function fetchData(url) {
-  try {
-    // Await the fetch request and get the response object
-    const response = await fetch(url);
-
-    // Check if the request was successful (status 200-299)
-    if (!response.ok) {
-      const message = `An error has occurred: ${response.status}`;
-      throw new Error(message);
-    }
-
-    // Await the parsing of the response body (e.g., as JSON)
-    const d = await response.json();
-	metadata= await response.json();
-    return d;
-
-  } catch (error) {
-    // Handle any errors that occurred during the fetch or processing
-    console.error("Fetch error:", error.message);
-  }
-}
-
 const fs=document.getElementById("file");
 fs.addEventListener("change",function(){
     document.getElementById("upload-text").innerText="Loading..."
@@ -32,10 +10,6 @@ fs.addEventListener("change",function(){
             if (e.hasOwnProperty("name"))customBlocks.push(e)
         })
         console.time("time to convert")
-		document.getElementById("upload-text").innerText="Fetching Project Metadata..."
-		var metadata
-		fetchData(`https://corsproxy.io/?url=https://c.gethopscotch.com/api/v1/projects/${data.uuid}`)
-		console.log(metadata)
 	    convertData(data);
         console.timeEnd("time to convert")
         console.time("time to display")
@@ -43,7 +17,7 @@ fs.addEventListener("change",function(){
 		document.querySelector(".scriptArea").style.display="inline"
         console.timeEnd("time to display")
 		document.getElementById("upload-text").innerText="Upload Hopscotch Project"
-        document.getElementById("legend").innerText=`Title: ${metadata.title}, Author: ${metadata.user.nickname}, ${(metadata.user.nickname!=metadata.user.original_user.nickname)?`Original User: ${metadata.user.original_user.nickname}, `:""}Project UUID: ${data.uuid}, Player: ${data.playerVersion}, Requires Advanced Mode: ${data.requires_beta_editor}`
+        document.getElementById("legend").innerText=`Project UUID: ${data.uuid}, Player: ${data.playerVersion}, Requires Advanced Mode: ${data.requires_beta_editor}`
         console.log(`# of characters: ${result.length}`)
     });
     n.readAsText(this.files[0])
