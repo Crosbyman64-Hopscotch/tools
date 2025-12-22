@@ -11,6 +11,7 @@ async function fetchData(url) {
 
     // Await the parsing of the response body (e.g., as JSON)
     const d = await response.json();
+	metadata=d
     return d;
 
   } catch (error) {
@@ -32,7 +33,8 @@ fs.addEventListener("change",function(){
         })
         console.time("time to convert")
 		document.getElementById("upload-text").innerText="Fetching Project Metadata..."
-		const metadata=fetchData(`https://corsproxy.io/?url=https://c.gethopscotch.com/api/v1/projects/${data.uuid}`)
+		const metadata={}
+		fetchData(`https://corsproxy.io/?url=https://c.gethopscotch.com/api/v1/projects/${data.uuid}`)
 		console.log(metadata)
 	    convertData(data);
         console.timeEnd("time to convert")
