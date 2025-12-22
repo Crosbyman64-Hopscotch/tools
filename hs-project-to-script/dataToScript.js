@@ -33,7 +33,7 @@ fs.addEventListener("change",function(){
         console.time("time to convert")
 		document.getElementById("upload-text").innerText="Fetching Project Metadata..."
 		const metadata=fetchData(`https://corsproxy.io/?url=https://c.gethopscotch.com/api/v1/projects/${data.uuid}`)
-		console.log(metadata.title)
+		console.log(metadata)
 	    convertData(data);
         console.timeEnd("time to convert")
         console.time("time to display")
